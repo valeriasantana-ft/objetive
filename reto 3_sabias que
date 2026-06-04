@@ -1,0 +1,71 @@
+#import "ViewController.h"
+
+@interface ViewController ()
+
+@property (strong, nonatomic) NSArray *tecnologia;
+@property (strong, nonatomic) NSArray *animales;
+@property (strong, nonatomic) NSArray *espacio;
+
+@property NSInteger indiceTecnologia;
+@property NSInteger indiceAnimales;
+@property NSInteger indiceEspacio;
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.tecnologia = @[
+        @"El primer disco duro pesaba más de una tonelada.",
+        @"Objective-C fue el lenguaje principal para iOS antes de Swift.",
+        @"Internet comenzó como un proyecto militar llamado ARPANET."
+    ];
+
+    self.animales = @[
+        @"Los pulpos tienen tres corazones.",
+        @"Las jirafas tienen la misma cantidad de vértebras cervicales que los humanos.",
+        @"Los delfines pueden reconocerse en un espejo."
+    ];
+
+    self.espacio = @[
+        @"Un día en Venus dura más que un año en Venus.",
+        @"La luz del Sol tarda aproximadamente 8 minutos en llegar a la Tierra.",
+        @"Júpiter tiene más de 90 lunas conocidas."
+    ];
+
+    self.indiceTecnologia = 0;
+    self.indiceAnimales = 0;
+    self.indiceEspacio = 0;
+}
+
+- (IBAction)mostrarDato:(id)sender {
+
+    NSInteger categoria = self.categoriaSegment.selectedSegmentIndex;
+
+    switch (categoria) {
+
+        case 0:
+            self.datoLabel.text = self.tecnologia[self.indiceTecnologia];
+            self.indiceTecnologia =
+            (self.indiceTecnologia + 1) % self.tecnologia.count;
+            break;
+
+        case 1:
+            self.datoLabel.text = self.animales[self.indiceAnimales];
+            self.indiceAnimales =
+            (self.indiceAnimales + 1) % self.animales.count;
+            break;
+
+        case 2:
+            self.datoLabel.text = self.espacio[self.indiceEspacio];
+            self.indiceEspacio =
+            (self.indiceEspacio + 1) % self.espacio.count;
+            break;
+
+        default:
+            self.datoLabel.text = @"Selecciona una categoría.";
+            break;
+    }
+}
