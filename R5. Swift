@@ -1,0 +1,154 @@
+import UIKit
+
+class ViewController: UIViewController {
+
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
+
+    @IBOutlet weak var optionButton1: UIButton!
+    @IBOutlet weak var optionButton2: UIButton!
+    @IBOutlet weak var optionButton3: UIButton!
+    @IBOutlet weak var optionButton4: UIButton!
+
+    var currentQuestion = 0
+
+    // Contadores de personajes
+    var heroCount = 0
+    var wizardCount = 0
+    var detectiveCount = 0
+    var warriorCount = 0
+
+    let questions = [
+
+        Question(
+            questionText: "¿Qué actividad prefieres?",
+            options: ["Ayudar personas", "Leer libros", "Resolver misterios", "Entrenar"]
+        ),
+
+        Question(
+            questionText: "¿Cuál es tu mayor fortaleza?",
+            options: ["Valentía", "Inteligencia", "Observación", "Disciplina"]
+        ),
+
+        Question(
+            questionText: "¿Qué herramienta usarías?",
+            options: ["Escudo", "Varita", "Lupa", "Espada"]
+        ),
+
+        Question(
+            questionText: "¿Cómo resuelves problemas?",
+            options: ["Actuando rápido", "Pensando", "Investigando", "Luchando"]
+        ),
+
+        Question(
+            questionText: "¿Qué te motiva?",
+            options: ["Justicia", "Conocimiento", "Verdad", "Honor"]
+        )
+    ]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadQuestion()
+    }
+
+    func loadQuestion() {
+
+        let question = questions[currentQuestion]
+
+        questionLabel.text = question.questionText
+
+        optionButton1.setTitle(question.options[0], for: .normal)
+        optionButton2.setTitle(question.options[1], for: .normal)
+        optionButton3.setTitle(question.options[2], for: .normal)
+        optionButton4.setTitle(question.options[3], for: .normal)
+
+        progressLabel.text = "Pregunta \(currentQuestion + 1) de 5"
+    }
+
+    func processAnswer(option: Int) {
+
+        switch option {
+
+        case 1:
+            heroCount += 1
+
+        case 2:
+            wizardCount += 1
+
+        case 3:
+            detectiveCount += 1
+
+        case 4:
+            warriorCount += 1
+
+        default:
+            break
+        }
+
+        currentQuestion += 1
+
+        if currentQuestion < questions.count {
+            loadQuestion()
+        } else {
+            showResult()
+        }
+    }
+
+    func showResult() {
+
+        let results = [
+            ("Superhéroe", heroCount,
+             "Eres valiente y siempre buscas ayudar a los demás."),
+            ("Mago", wizardCount,
+             "Te caracteriza tu inteligencia y deseo de aprender."),
+            ("Detective", detectiveCount,
+             "Analizas cada situación antes de actuar."),
+            ("Guerrero", warriorCount,
+             "Eres disciplinado y enfrentas los retos con determinación.")
+        ]
+
+        var winner = results[0]
+
+        // Uso de estructura iterativa (for)
+        for result in results {
+
+            if result.1 > winner.1 {
+                winner = result
+            }
+        }
+
+        let alert = UIAlertController(
+            title: "Tu personaje es: \(winner.0)",
+            message: winner.2,
+            preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(
+            title: "Aceptar",
+            style: .default))
+
+        present(alert, animated: true)
+    }
+
+    @IBAction func option1Pressed(_ sender: UIButton) {
+        processAnswer(option: 1)
+    }
+
+    @IBAction func option2Pressed(_ sender: UIButton) {
+        processAnswer(option: 2)
+    }
+
+    @IBAction func option3Pressed(_ sender: UIButton) {
+        processAnswer(option: 3)
+    }
+
+    @IBAction func option4Pressed(_ sender: UIButton) {
+        processAnswer(option: 4)
+    }
+}
+let questions = [Question(...)]
+let results = [...]
+heroCount += 1
+if result.1 > winner.1
+for result in results
+switch option
+if currentQuestion < questions.count
